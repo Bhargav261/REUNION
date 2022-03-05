@@ -1,14 +1,344 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Serif';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+  font-size: 12px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.flex{
+  display: flex;
+}
+
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+.align-items-start{
+  align-items: start;
+  display: flex;
+}
+
+.align-items-center{
+  align-items: center;
+  display: flex;
+}
+
+.align-items-end{
+  align-items: end;
+  display: flex;
+}
+
+.justify-content-start{
+  display: flex;
+  justify-content: start;
+}
+
+.justify-content-center{
+  display: flex;
+  justify-content: center;
+}
+
+.justify-content-end{
+  display: flex;
+  justify-content: end;
+}
+
+.justify-space-between{
+  display: flex;
+  justify-content: space-between;
+}
+
+.justify-space-around{
+  display: flex;
+  justify-content: space-around;
+}
+
+.box{
+  border: 1px solid #efeeee;
+  margin: 30px;
+  border-radius: 12px;
+  box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+  height: 90vh;
+}
+
+.boxHeader{
+  display: flex;
+  padding: 12px;
+  border-bottom: 1px solid #efeeee;
+  justify-content: space-between;
+}
+
+.form-control{
+  border: 1px solid #dad8d8;
+  height: 18px;
+  border-radius: 7px;
+}
+
+/* Floating CSS Start */
+.floating{
+  width : 100%;
+  padding : 10px 0;
+  position : relative
+}
+
+.floating input{
+  width : 100%;
+  padding : 10px 10px;
+  display : block;
+  background : transparent;
+  outline : none;
+}	
+
+.floating label {
+  position: absolute;
+  top: -7px;
+  left: 12px;
+  color: #8a8888;
+  font-weight: 100;
+  pointer-events: none;
+  transform: translateY(30px);
+  transition: all 200ms ease-in-out;
+}	
+
+.floating input:focus + label {
+  color : #142534;
+  transform : translateY(10px);
+  left : 5px;
+  padding : 0px 5px;
+  background : white;
+}
+
+.floating input::placeholder {  
+  padding-left : 2px;
+  font-weight : 100;
+  color: transparent;
+          } 
+
+.floating input:not(:placeholder-shown) + label {
+  color: #142534;
+  transform : translateY(10px);
+  left : 5px;
+  padding : 0px 5px;
+  background : white;
+}
+
+.floating select{
+  width : 100%;
+  padding : 0px 10px;
+  display : block;
+  background : transparent;
+  outline : none;
+}	
+
+.floating .select {
+  position: absolute;
+  top: 0;
+  left : 12px;
+  font-weight : 100;
+  pointer-events : none;
+  transform : translateY(12px);
+  transition : all 400ms ease-in-out;
+  padding : 0px 5px;
+  background : white;
+}	
+/* Floating CSS End */
+
+/* Scroll Width Css Start */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+/* Scroll Width Css End */
+
+.searchBox{
+  width: 250px;
+  min-width: 200px;
+}
+
+.ml-20{
+  margin-left: 20px;
+}
+
+  
+.ml-10{
+  margin-left: 10px;
+}
+
+.mr-10{
+  margin-right: 10px;
+}
+
+.mr-20{
+  margin-right: 20px;
+}
+
+.cursor-pointer{
+  cursor: pointer
+}
+.compnayLogo{
+  align-items: center;
+  display: flex;
+}
+
+.dashboard{
+  display: flex;
+}
+
+.hamburger{
+  display: none;
+}
+
+.leftBar{
+  display: block;
+  width: 20%;
+  min-width: 250px;
+  border-right: 1px solid #efeeee;
+  height: 75vh;
+  padding: 12px;
+}
+
+.rightBar{
+  padding-top:15px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 35px;
+  height: 75vh;
+}
+
+.bigImage{
+  width: 150px;
+  height: 150px;
+}
+
+.smallImage{
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+}
+
+.viewProduct{
+  display: flex;
+  flex-wrap: wrap;
+  height: calc(100% - 80px);
+  overflow: auto;
+  /* justify-content: center; */
+}
+
+.productBox{
+  padding: 15px;
+  border: 1px solid #cfcbcb;
+  border-radius: 8px;
+  width: 250px;
+  margin: 15px;
+  position: relative;
+}
+
+.lightText{
+  font-size: 14px;
+  color: #aca7a7;
+  padding: 3px;
+}
+
+.darkText{
+  font-size: 14px;
+  font-weight: 600;
+  padding: 3px;
+}
+
+.imagePart{
+  background-size: cover;
+  justify-content: center;
+  display: flex;
+}
+
+.imageBorder{
+  border: 1px solid #cfcbcb;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.priceSection{
+  align-items: center;
+}
+
+.productPriceLabel{
+  padding: 3px;
+}
+
+.productPrice{
+  padding: 3px;
+}
+
+.smallLine{
+  height: 32px;
+  background: black;
+  width: 4px;
+  position: absolute;
+  top: 22px;
+  left: -3px;
+}
+
+.divedier{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid #efeeee;
+}
+
+.sizeSection{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sizeLabel{
+  font-size: 14px;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.shoesSize{
+  border: 1px solid #cfcbcb;
+  width: 14px;
+  padding: 10px;
+  justify-content: center;
+  margin: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.categoryDisplay{
+  padding: 2px;
+}
+
+@media (max-width: 660px) {
+  .leftBar{
+    display: none;
+  }
+
+  /* .hamburger{
+    display: block;
+  } */
 }
