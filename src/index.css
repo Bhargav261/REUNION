@@ -175,6 +175,8 @@ code {
 .searchBox{
   width: 250px;
   min-width: 200px;
+  align-items: center;
+  display: flex;
 }
 
 .ml-20{
@@ -212,8 +214,8 @@ code {
 
 .leftBar{
   display: block;
-  width: 20%;
-  min-width: 250px;
+  width: 40%;
+  min-width: 280px;
   border-right: 1px solid #efeeee;
   height: 75vh;
   padding: 12px;
@@ -250,8 +252,8 @@ code {
   padding: 15px;
   border: 1px solid #cfcbcb;
   border-radius: 8px;
-  width: 250px;
-  margin: 15px;
+  width: 214px;
+  margin: 12px 15px;
   position: relative;
 }
 
@@ -341,4 +343,79 @@ code {
   /* .hamburger{
     display: block;
   } */
+}
+
+.search-form-control{
+  border: 1px solid #dad8d8;
+  height: 35px;
+  width: 100%;
+  padding-left: 10px;
+  border-radius: 20px;
+  padding-right: 30px;
+}
+
+.searchIcon{
+  margin-left: -26px;
+  font-size: 13px;
+}
+
+.search-form-control:focus, select:focus{
+  outline: none;
+}
+
+.select-form-control{
+  height: 30px;
+  padding: 0px 4px;
+  border: 0;
+}
+
+.form-check-label{
+  align-items: center;
+  display: flex;
+}
+
+.form-check-label input{
+  height: 15px;
+  width: 25px;
+}
+
+.categoryAnimation {
+  animation: MoveUpDown 1s ease-in;
+  max-height: 150px;
+}
+
+.mt-30{
+  margin-top: 30px;
+}
+
+.mb-30{
+  margin-bottom: 30px;
+}
+
+.leftbarHeight{
+  max-height: calc(100% - 40px);
+    overflow: auto;
+}
+
+@keyframes MoveUpDown {
+  0%{
+    height: 0px;
+  }
+  100% {
+    height: 10px;
+  }
+}
+
+.input-range{
+  left: 18px !important;
+  width: 85% !important;
+}
+
+.input-range__slider{
+  background: black !important;
+  border: 1px solid black !important;
+}
+
+.input-range__track--active{
+  background: black !important;
 }

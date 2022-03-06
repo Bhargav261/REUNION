@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import Input from '../Common.js/Input';
+import { debounce } from 'lodash';
 
 const Header = () => {
+
+    //Manage Ref and Object
+    const searchRef = useRef();
 
     //Manage State
     const [search, setSearch] = useState("");
 
     //Functions
+
+    //Search Change Event
     const onHandleChnage = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
+        let lowerCaseValue = value.toLowerCase();
+        // const searchData = copyData.filter(item => item.name.toLowerCase().includes(lowerCaseValue));
         setSearch(value);
+        debouncedSave(value);
     }
+
+    //Debounce Change
+    const debouncedSave = useCallback(
+        debounce(nextValue =>
+            console.log(nextValue)
+            , 500),
+        [],
+    );
 
     return (
         <div className='boxHeader'>
