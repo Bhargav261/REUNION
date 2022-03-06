@@ -14,13 +14,13 @@ export const slice = createSlice({
         shoesSize: [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49],
         shoesList: shoesList,
         selectedCategory: [],
-        sortBy: 'sortByPrice',
+        sortBy: "",
         priceRange: {
-            min: 20,
-            max: 40,
+            min: 0,
+            max: 500,
         },
         shoesSearch: '',
-        selectedSize: [],
+        selectedSize: ''
     },
     reducers: {
         onSelectCategory: (state, action) => {
@@ -51,21 +51,40 @@ export const slice = createSlice({
         },
         onSizeChnage: (state, action) => {
             let { name } = action.payload;
+            
             let selectedArray = state.selectedSize;
-            let index = selectedArray.indexOf(name);
-
-            if (index == -1) {
-                state.selectedSize.push(name);
-                state.selectedSize = selectedArray;
-            } else {
-                selectedArray.splice(index, 1);
-                state.selectedSize = selectedArray;
+            if(selectedArray == name){
+                state.selectedSize = "";
+            }else{
+                state.selectedSize = name;
             }
+            // let index = selectedArray.indexOf(name);
+
+            // if (index == -1) {
+            //     state.selectedSize.push(name);
+            //     state.selectedSize = selectedArray;
+            // } else {
+            //     selectedArray.splice(index, 1);
+            //     state.selectedSize = selectedArray;
+            // }
+        },
+        onClearSearch: (state) => {
+            state.shoesSearch = "";
+        },
+        onImageViewChange: (state, action) => {
+            const {index, imageIndex} = action.payload;
+
+            let data = state.shoesList;
+            data[index].showImage = imageIndex;
+
+            state.shoesList = data;
+
         }
+
     },
     extraReducers: {}
 });
 
-export const { onSelectCategory, onSortBy, onPriceRange, onSearchChange, onSizeChnage } = slice.actions;
+export const { onSelectCategory, onSortBy, onPriceRange, onSearchChange, onSizeChnage, onClearSearch, onImageViewChange } = slice.actions;
 
 export default slice.reducer;

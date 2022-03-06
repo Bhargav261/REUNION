@@ -206,6 +206,7 @@ code {
 
 .dashboard{
   display: flex;
+  flex-direction: row;
 }
 
 .hamburger{
@@ -244,7 +245,7 @@ code {
 .viewProduct{
   display: flex;
   flex-wrap: wrap;
-  height: calc(100% - 80px);
+  max-height: calc(100% - 80px);
   overflow: auto;
   /* justify-content: center; */
 }

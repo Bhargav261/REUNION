@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Input from '../Common.js/Input';
+import Input from '../Common/Input';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -76,7 +76,7 @@ const LeftSide = () => {
                         <div className="divedier"></div>
                         <div className='mt-30 mb-30'>
                             <InputRange
-                                maxValue={100}
+                                maxValue={500}
                                 minValue={0}
                                 step={2}
                                 value={priceRange}
@@ -88,7 +88,7 @@ const LeftSide = () => {
                         <div className="sizeLabel">Size</div>
                         <div className="sizeSection">
                             {shoesSize?.length > 0 && shoesSize.map((item, index) => (
-                                <div key={index} className={`shoesSize cursor-pointer ${selectedSize?.includes(`${item}`) ? 'activeSize' : ''}`} id={item} onClick={onSizeChange}>
+                                <div key={index} className={`shoesSize cursor-pointer ${selectedSize == item ? 'activeSize' : ''}`} id={item} onClick={onSizeChange}>
                                     {item}
                                 </div>
                             ))}

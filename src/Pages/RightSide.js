@@ -1,20 +1,135 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { onSortBy } from '../Redux/HomeSlice';
+import { onSortBy, onImageViewChange } from '../Redux/HomeSlice';
+import ResultNotFound from '../Common/ResultNotFound';
+import { parseInt } from 'lodash';
 
 const RightSide = () => {
+
     //object
     const dispatch = useDispatch();
 
+    //Manage State
+    const [shoes, setShoes] = useState([]);
+
     //get data from store
-    const { shoesList, sortBy } = useSelector(state => state.home);
+    const { shoesList, sortBy, shoesSearch, selectedSize, selectedCategory, priceRange } = useSelector(state => state.home);
+
+    //useeffect
+
+    //Store Shoes Data in state
+    useEffect(() => {
+        if (shoesList?.length > 0) {
+            setShoes(shoesList);
+        }
+    }, [shoesList])
+
+    useEffect(() => {
+        filterResult({ bySearch: shoesSearch, byCategory: selectedCategory, bySize: selectedSize, bySort: sortBy, priceRange: priceRange })
+    }, [shoesList, shoesSearch, selectedCategory, selectedSize, sortBy, priceRange])
+
+    // //filter by search
+    // useEffect(() => {
+    //     if (shoesSearch) {
+    //         const searchData = shoes.filter(item => item.name.toLowerCase().includes(shoesSearch) || item.title.toLowerCase().includes(shoesSearch));
+    //         setShoes(searchData);
+    //     } else {
+    //         setShoes(shoesList)
+    //     }
+    // }, [shoesSearch])
+
+    // //filter by Category
+    // useEffect(() => {
+    //     if (selectedCategory?.length > 0) {
+    //         const categoryData = shoes.filter(item => selectedCategory?.includes(item.category));
+    //         setShoes(categoryData);
+    //     } else {
+    //         setShoes(shoesList)
+    //     }
+    // }, [selectedCategory])
+
+    // //filter by Size
+    // useEffect(() => {
+    //     if (selectedSize) {
+    //         const sizeData = shoes.filter(item => item.avalSize?.includes(parseInt(selectedSize)));
+    //         setShoes(sizeData);
+    //     } else {
+    //         setShoes(shoesList)
+    //     }
+    // }, [selectedSize])
+
+
+    // filter by Price Range
+    // useEffect(() => {
+    //     console.log("shoes", shoes);
+    //     const priceData = shoesList.filter(item => parseInt(item.price) >= parseInt(priceRange?.min) && parseInt(item.price) <= parseInt(priceRange?.max));
+    //     setShoes(priceData);
+    // }, [priceRange])
+
+
+    // filter by sortBy
+    // useEffect(() => {
+    //     if (sortBy && shoes?.length > 0) {
+    //         if (sortBy == "sortByPrice") {
+    //             let sortByPrice = shoes.sort((a, b) => (parseInt(a.price) > parseInt(b.price)) ? 1 : ((parseInt(b.price) > parseInt(a.price)) ? -1 : 0));
+    //             setShoes(sortByPrice);
+    //         } else {
+    //             let sortByName = shoes.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : (b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0);
+    //             setShoes(sortByName)
+    //         }
+    //         setTemp(!temp);
+    //     }
+    // }, [sortBy])
 
     //onSortBy Chnage
     const onSortByChnage = (e) => {
         const { name, value } = e.target;
+        dispatch(onSortBy({ value }));
+    }
 
-        dispatch(onSortBy(value));
+    //on Image View Click
+    const onImageViewClick = (e, index) => {
+        const { id } = e.target;
+        dispatch(onImageViewChange({ index, imageIndex: id }));
+    }
 
+    //Filter Result 
+    const filterResult = ({ bySearch, byCategory, bySize, bySort }) => {
+
+        if (bySearch || byCategory?.length > 0 || bySize || bySort || priceRange) {
+
+            let filterData = shoesList;
+
+            if (bySearch) {
+                filterData = filterData.filter(item => item.name.toLowerCase().includes(shoesSearch) || item.title.toLowerCase().includes(shoesSearch));
+            }
+
+            if (byCategory?.length > 0) {
+                filterData = filterData.filter(item => selectedCategory?.includes(item.category));
+            }
+
+            if (bySize) {
+                filterData = filterData.filter(item => item.avalSize?.includes(parseInt(selectedSize)));
+            }
+
+            console.log("shoes :- ", shoes);
+            console.log("filterData :- ", filterData);
+
+            if (sortBy && shoes?.length > 0) {
+                if (sortBy == "sortByPrice") {
+                    let sortByPrice = shoes.sort((a, b) => (parseInt(a.price) > parseInt(b.price)) ? 1 : ((parseInt(b.price) > parseInt(a.price)) ? -1 : 0));
+                    console.log("sortByPrice", filterData);
+                } else {
+                    let sortByName = shoes.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : (b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0);
+                    console.log("sortByName", filterData);
+                }
+            }
+            filterData = filterData.filter(item => parseInt(item.price) >= parseInt(priceRange?.min) && parseInt(item.price) <= parseInt(priceRange?.max));
+
+            setShoes(filterData);
+        } else {
+            setShoes(shoesList)
+        }
     }
 
     return (
@@ -24,6 +139,7 @@ const RightSide = () => {
                     <h1>New Arrivals</h1>
                     <div className="align-items-center">
                         <select value={sortBy} className="select-form-control" onChange={onSortByChnage}>
+                            <option value="">Sort Your List</option>
                             <option value="sortByPrice">Sort By Price</option>
                             <option value="sortByName">Sort By Name</option>
                         </select>
@@ -31,15 +147,15 @@ const RightSide = () => {
                 </div>
                 <div className="viewProduct">
                     {
-                        shoesList?.length > 0 ?
+                        shoes?.length > 0 ?
 
-                            shoesList.map((item, index) => (
+                            shoes.map((item, index) => (
                                 <div key={index} className="productBox">
                                     <div className="smallLine"></div>
-                                    <div className="lightText">High Speed Sneakers</div>
-                                    <div className="darkText">Balenciaga</div>
+                                    <div className="lightText">{item.title}</div>
+                                    <div className="darkText">{item?.name}</div>
                                     <div className="imagePart">
-                                        <img src={item?.images[0]} alt="" className="bigImage" />
+                                        <img src={item?.images[item?.showImage]} alt="" className="bigImage" />
                                     </div>
                                     <div className="justify-space-between">
                                         <div className="priceSection">
@@ -47,9 +163,9 @@ const RightSide = () => {
                                             <div className="productPrice">$ {item?.price}</div>
                                         </div>
                                         <div className="flex">
-                                            {item?.images?.length > 0 && item?.images?.map((item, index) => (
-                                                <div className='imagePart imageBorder' key={index}>
-                                                    <img src={item} alt="" className="smallImage" />
+                                            {item?.images?.length > 0 && item?.images?.map((kitem, kindex) => (
+                                                <div className='imagePart imageBorder' key={kindex}>
+                                                    <img src={kitem} alt="" className="smallImage" id={kindex} onClick={(e) => onImageViewClick(e, index)} />
                                                 </div>
                                             ))}
                                             {/* <div className='imagePart imageBorder'>
@@ -60,9 +176,9 @@ const RightSide = () => {
                                 </div>
                             ))
                             :
-                            <div className='loading'>
-                                Result Not Found !!
-                            </div>
+                            <>
+                                <ResultNotFound />
+                            </>
                     }
 
                 </div>

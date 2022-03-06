@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Input = ({ type, name, id, value, label, onChange, required, ...rest }) => {
+const Input = ({ onSearchClear, type, name, id, value, label, onChange, required, ...rest }) => {
+
     return (
         <>
             {
@@ -17,9 +18,9 @@ const Input = ({ type, name, id, value, label, onChange, required, ...rest }) =>
             {
                 (type == "searchBox") && (
                     <>
-                        <input type={type} name={name} className="search-form-control" id={label} value={value} onChange={onChange} placeholder={label} required={required} {...rest} />
+                        <input type={type} name={name} className="search-form-control" id={label} value={value} autoComplete="off" onChange={onChange} placeholder={label} required={required} {...rest} />
                         {
-                            value ? <i className='fa fa-times searchIcon cursor-pointer'></i> : <i className='cursor-pointer fa fa-search searchIcon'></i>
+                            value ? <i className='fa fa-times searchIcon cursor-pointer' onClick={onSearchClear}></i> : <i className='cursor-pointer fa fa-search searchIcon'></i>
                         }
                         {/* <div className="floating">
                             <input type={type} name={name} className="form-control" id={label} value={value} onChange={onChange} placeholder={label} required={required} {...rest} />
