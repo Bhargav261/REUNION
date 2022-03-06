@@ -1,6 +1,5 @@
 import React from 'react';
 import Input from '../Common.js/Input';
-import InputRange from 'react-input-range';
 
 const Home = () => {
     return (
@@ -50,7 +49,7 @@ const Home = () => {
                             <div className="lightText">High Speed Sneakers</div>
                             <div className="darkText">Balenciaga</div>
                             <div className="imagePart">
-                                <img src="./images/shoes.jpg" alt="" className="bigImage" />
+                                <img src="/images/shoes.jpg" alt="" className="bigImage" />
                             </div>
                             <div className="justify-space-between">
                                 <div className="priceSection">
@@ -59,10 +58,10 @@ const Home = () => {
                                 </div>
                                 <div className="flex">
                                     <div className='imagePart imageBorder'>
-                                        <img src="./images/shoes.jpg" alt="" className="smallImage" />
+                                        <img src="/images/shoes.jpg" alt="" className="smallImage" />
                                     </div>
                                     <div className='imagePart imageBorder'>
-                                        <img src="./images/shoes.jpg" alt="" className="smallImage" />
+                                        <img src="/images/shoes.jpg" alt="" className="smallImage" />
                                     </div>
                                 </div>
                             </div>
