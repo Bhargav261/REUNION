@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import Input from '../Common/Input';
-import InputRange from 'react-input-range';
-import 'react-input-range/lib/css/index.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { onSelectCategory, onPriceRange, onSizeChnage } from '../Redux/HomeSlice';
+import PriceRange from '../Common/PriceRange';
+import Category from '../Common/Category';
+import ShoesSize from '../Common/Size';
 
 const LeftSide = () => {
 
@@ -11,12 +9,6 @@ const LeftSide = () => {
     const [categoryStatus, setCategoryStatus] = useState(true);
     const [priceRangeStatus, setPriceRangeStatus] = useState(true);
     const [sizeStatus, setSizeStatus] = useState(true);
-
-    //object
-    const dispatch = useDispatch();
-
-    //get data from store
-    const { category, shoesSize, selectedCategory, priceRange, selectedSize } = useSelector(state => state.home);
 
     //on Chnage Category Status
     const openHideDrop = (type) => {
@@ -27,25 +19,6 @@ const LeftSide = () => {
         } else if (type == "size") {
             setSizeStatus(!sizeStatus);
         }
-    }
-
-    //On CheckBox Change Event
-    const onCheckboxChange = (e) => {
-        const { name, value } = e.target;
-        let check = e.target.checked;
-        dispatch(onSelectCategory({ name, check }))
-    }
-
-    //On Price Chnage
-    const onRangeChange = (value) => {
-
-        dispatch(onPriceRange({ value }));
-    }
-
-    //on Size Change
-    const onSizeChange = (e) => {
-        const { id, name, value } = e.target;
-        dispatch(onSizeChnage({ name: id }))
     }
 
     //Close Modal in Mobile View
@@ -60,7 +33,7 @@ const LeftSide = () => {
                 <div className='modalClose'>
                     <div className='justify-content-end'>
                         <button className='closeIcons' onClick={closeModal}>
-                        <i className='fa fa-times font-15'></i>
+                            <i className='fa fa-times font-15'></i>
                         </button>
                     </div>
                     <div className="divedier"></div>
@@ -81,13 +54,7 @@ const LeftSide = () => {
                             categoryStatus && (
                                 <>
                                     <div className="divedier"></div>
-                                    <div>
-                                        {category?.length > 0 && category.map((item, index) => (
-                                            <div className="categoryDisplay" key={index}>
-                                                <Input type="checkbox" label={item?.label} id={index} name={item?.value} checked={selectedCategory.includes(item?.value)} onChange={onCheckboxChange} />
-                                            </div>
-                                        ))}
-                                    </div>
+                                    <Category />
                                 </>
                             )
                         }
@@ -108,14 +75,7 @@ const LeftSide = () => {
                             priceRangeStatus && (
                                 <>
                                     <div className="divedier"></div>
-                                    <div className='mt-30 mb-30'>
-                                        <InputRange
-                                            maxValue={500}
-                                            minValue={0}
-                                            step={2}
-                                            value={priceRange}
-                                            onChange={onRangeChange} />
-                                    </div>
+                                    <PriceRange />
                                 </>
                             )
                         }
@@ -136,13 +96,7 @@ const LeftSide = () => {
                             sizeStatus && (
                                 <>
                                     <div className="divedier"></div>
-                                    <div className="sizeSection">
-                                        {shoesSize?.length > 0 && shoesSize.map((item, index) => (
-                                            <div key={index} className={`shoesSize cursor-pointer ${selectedSize == item ? 'activeSize' : ''}`} id={item} onClick={onSizeChange}>
-                                                {item}
-                                            </div>
-                                        ))}
-                                    </div>
+                                    <ShoesSize />
                                 </>
                             )
                         }

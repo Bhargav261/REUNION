@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { onSortBy, onImageViewChange } from '../Redux/HomeSlice';
+import { useSelector } from 'react-redux';
 import ResultNotFound from '../Common/ResultNotFound';
 import { parseInt } from 'lodash';
+import ProductView from '../Common/ProductView';
+import SortBy from '../Common/SortBy';
+
 
 const RightSide = () => {
-
-    //object
-    const dispatch = useDispatch();
 
     //Manage State
     const [shoes, setShoes] = useState([]);
@@ -31,18 +30,6 @@ const RightSide = () => {
 
 
     //Functions
-
-    //onSortBy Chnage
-    const onSortByChnage = (e) => {
-        const { name, value } = e.target;
-        dispatch(onSortBy({ value }));
-    }
-
-    //on Image View Click
-    const onImageViewClick = (e, imageId) => {
-        const { id } = e.target;
-        dispatch(onImageViewChange({ imageId, imageIndex: id }));
-    }
 
     //Filter Result 
     const filterResult = ({ bySearch, byCategory, bySize, bySort }) => {
@@ -84,20 +71,11 @@ const RightSide = () => {
         <>
             <div className="rightBar">
                 <div className="justify-space-between">
-                    <div className='align-items-center'>
-                        {/* <div className='filterView'>
-                            <button className='filterButton'><i className='fa fa-filter filterIcon'></i></button>
-                        </div> */}
-                        <div className='ml-5'>
-                            <h1>New Arrivals</h1>
-                        </div>
+                    <div className='ml-5'>
+                        <h1>New Arrivals</h1>
                     </div>
                     <div className="align-items-center">
-                        <select value={sortBy} className="select-form-control" onChange={onSortByChnage}>
-                            <option value="">Sort Your List</option>
-                            <option value="sortByPrice">Sort By Price</option>
-                            <option value="sortByName">Sort By Name</option>
-                        </select>
+                        <SortBy />
                     </div>
                 </div>
                 <div className="viewProduct">
@@ -105,30 +83,7 @@ const RightSide = () => {
                         shoes?.length > 0 ?
 
                             shoes.map((item, index) => (
-                                <div key={index} className="productBox">
-                                    <div className="smallLine"></div>
-                                    <div className="lightText">{item.title}</div>
-                                    <div className="darkText">{item?.name}</div>
-                                    <div className="imagePart">
-                                        <img src={item?.images[item?.showImage]} alt="" className="bigImage" />
-                                    </div>
-                                    <div className="justify-space-between">
-                                        <div className="priceSection">
-                                            <div className="productPriceLabel">Price</div>
-                                            <div className="productPrice">$ {item?.price}</div>
-                                        </div>
-                                        <div className="flex">
-                                            {item?.images?.length > 0 && item?.images?.map((kitem, kindex) => (
-                                                <div className='imagePart imageBorder' key={kindex}>
-                                                    <img src={kitem} alt="" className="smallImage" id={kindex} onClick={(e) => onImageViewClick(e, item?.id)} />
-                                                </div>
-                                            ))}
-                                            {/* <div className='imagePart imageBorder'>
-                                        <img src="Images/shoes.jpg" alt="" className="smallImage" />
-                                    </div> */}
-                                        </div>
-                                    </div>
-                                </div>
+                                <ProductView item={item} index={index} />
                             ))
                             :
                             <>
