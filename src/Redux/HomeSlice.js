@@ -72,15 +72,12 @@ export const slice = createSlice({
             state.shoesSearch = "";
         },
         onImageViewChange: (state, action) => {
-            const {index, imageIndex} = action.payload;
-
+            const {imageId, imageIndex} = action.payload;
             let data = state.shoesList;
+            let index = data.findIndex(x => x.id === imageId);
             data[index].showImage = imageIndex;
-
             state.shoesList = data;
-
         }
-
     },
     extraReducers: {}
 });

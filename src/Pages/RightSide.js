@@ -39,9 +39,9 @@ const RightSide = () => {
     }
 
     //on Image View Click
-    const onImageViewClick = (e, index) => {
+    const onImageViewClick = (e, imageId) => {
         const { id } = e.target;
-        dispatch(onImageViewChange({ index, imageIndex: id }));
+        dispatch(onImageViewChange({ imageId, imageIndex: id }));
     }
 
     //Filter Result 
@@ -113,7 +113,7 @@ const RightSide = () => {
                                         <div className="flex">
                                             {item?.images?.length > 0 && item?.images?.map((kitem, kindex) => (
                                                 <div className='imagePart imageBorder' key={kindex}>
-                                                    <img src={kitem} alt="" className="smallImage" id={kindex} onClick={(e) => onImageViewClick(e, index)} />
+                                                    <img src={kitem} alt="" className="smallImage" id={kindex} onClick={(e) => onImageViewClick(e, item?.id)} />
                                                 </div>
                                             ))}
                                             {/* <div className='imagePart imageBorder'>
