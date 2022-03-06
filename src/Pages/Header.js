@@ -1,6 +1,8 @@
 import React, { useState, useRef, useCallback } from 'react';
 import Input from '../Common.js/Input';
 import { debounce } from 'lodash';
+import { useSelector, useDispatch } from 'react-redux';
+import { onSearchChange } from '../Redux/HomeSlice';
 
 const Header = () => {
 
@@ -9,6 +11,12 @@ const Header = () => {
 
     //Manage State
     const [search, setSearch] = useState("");
+
+    //object
+    const dispatch = useDispatch();
+
+    //get data from store
+    const { shoesSearch } = useSelector(state => state.home);
 
     //Functions
 
@@ -24,7 +32,7 @@ const Header = () => {
     //Debounce Change
     const debouncedSave = useCallback(
         debounce(nextValue =>
-            console.log(nextValue)
+            dispatch(onSearchChange({nextValue}))
             , 500),
         [],
     );

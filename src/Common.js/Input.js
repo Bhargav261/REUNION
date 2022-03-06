@@ -39,8 +39,8 @@ const Input = ({ type, name, id, value, label, onChange, required, ...rest }) =>
                             </label>
                         </div> */}
 
-                        <label htmlFor={id} className="form-check-label">
-                            <input id={id} type="checkbox" role="checkbox" className="form-check-input" /><span className="custom">{label}</span>
+                        <label htmlFor={id} className="form-check-label cursor-pointer">
+                            <input id={id} type="checkbox" name={name} role="checkbox" className="form-check-input" onChange={onChange}  {...rest} /><span className="custom">{label}</span>
                         </label>
                     </>
                 )
