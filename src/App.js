@@ -4,9 +4,11 @@ import Header from './Pages/Header';
 
 function App() {
   return (
+    <div className='main'>
     <div className="box">
       <Header />
       <Home />
+    </div>
     </div>
   );
 }

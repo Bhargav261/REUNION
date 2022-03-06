@@ -48,9 +48,23 @@ const LeftSide = () => {
         dispatch(onSizeChnage({ name: id }))
     }
 
+    //Close Modal in Mobile View
+    const closeModal = () => {
+        var element = document.getElementById("toggleLeft");
+        element.classList.remove("active");
+    }
+
     return (
         <>
-            <div className="leftBar">
+            <div className="leftBar" id="toggleLeft">
+                <div className='modalClose'>
+                    <div className='justify-content-end'>
+                        <button className='closeIcons' onClick={closeModal}>
+                        <i className='fa fa-times font-15'></i>
+                        </button>
+                    </div>
+                    <div className="divedier"></div>
+                </div>
                 <div className="leftbarHeight">
                     <div>
                         <div className="cursor-pointer justify-space-between" onClick={() => openHideDrop('category')}>

@@ -26,7 +26,7 @@ const RightSide = () => {
 
     //Call Filter Function When Parametter Change
     useEffect(() => {
-        filterResult({bySearch: shoesSearch, byCategory: selectedCategory, bySize: selectedSize, bySort: sortBy, priceRange: priceRange })
+        filterResult({ bySearch: shoesSearch, byCategory: selectedCategory, bySize: selectedSize, bySort: sortBy, priceRange: priceRange })
     }, [shoesList, shoesSearch, selectedCategory, selectedSize, sortBy, priceRange])
 
 
@@ -47,7 +47,7 @@ const RightSide = () => {
     //Filter Result 
     const filterResult = ({ bySearch, byCategory, bySize, bySort }) => {
 
-        if ( bySearch || byCategory?.length > 0 || bySize || bySort || priceRange) {
+        if (bySearch || byCategory?.length > 0 || bySize || bySort || priceRange) {
 
             let filterData = shoesList;
 
@@ -63,7 +63,7 @@ const RightSide = () => {
                 filterData = filterData.filter(item => item.avalSize?.includes(parseInt(selectedSize)));
             }
 
-            
+
             if (sortBy) {
                 if (sortBy == "sortByPrice") {
                     filterData = filterData.slice().sort((a, b) => (parseInt(a.price) > parseInt(b.price)) ? 1 : ((parseInt(b.price) > parseInt(a.price)) ? -1 : 0));
@@ -84,7 +84,14 @@ const RightSide = () => {
         <>
             <div className="rightBar">
                 <div className="justify-space-between">
-                    <h1>New Arrivals</h1>
+                    <div className='align-items-center'>
+                        {/* <div className='filterView'>
+                            <button className='filterButton'><i className='fa fa-filter filterIcon'></i></button>
+                        </div> */}
+                        <div className='ml-5'>
+                            <h1>New Arrivals</h1>
+                        </div>
+                    </div>
                     <div className="align-items-center">
                         <select value={sortBy} className="select-form-control" onChange={onSortByChnage}>
                             <option value="">Sort Your List</option>
