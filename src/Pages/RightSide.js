@@ -24,62 +24,13 @@ const RightSide = () => {
         }
     }, [shoesList])
 
+    //Call Filter Function When Parametter Change
     useEffect(() => {
-        filterResult({ bySearch: shoesSearch, byCategory: selectedCategory, bySize: selectedSize, bySort: sortBy, priceRange: priceRange })
+        filterResult({bySearch: shoesSearch, byCategory: selectedCategory, bySize: selectedSize, bySort: sortBy, priceRange: priceRange })
     }, [shoesList, shoesSearch, selectedCategory, selectedSize, sortBy, priceRange])
 
-    // //filter by search
-    // useEffect(() => {
-    //     if (shoesSearch) {
-    //         const searchData = shoes.filter(item => item.name.toLowerCase().includes(shoesSearch) || item.title.toLowerCase().includes(shoesSearch));
-    //         setShoes(searchData);
-    //     } else {
-    //         setShoes(shoesList)
-    //     }
-    // }, [shoesSearch])
 
-    // //filter by Category
-    // useEffect(() => {
-    //     if (selectedCategory?.length > 0) {
-    //         const categoryData = shoes.filter(item => selectedCategory?.includes(item.category));
-    //         setShoes(categoryData);
-    //     } else {
-    //         setShoes(shoesList)
-    //     }
-    // }, [selectedCategory])
-
-    // //filter by Size
-    // useEffect(() => {
-    //     if (selectedSize) {
-    //         const sizeData = shoes.filter(item => item.avalSize?.includes(parseInt(selectedSize)));
-    //         setShoes(sizeData);
-    //     } else {
-    //         setShoes(shoesList)
-    //     }
-    // }, [selectedSize])
-
-
-    // filter by Price Range
-    // useEffect(() => {
-    //     console.log("shoes", shoes);
-    //     const priceData = shoesList.filter(item => parseInt(item.price) >= parseInt(priceRange?.min) && parseInt(item.price) <= parseInt(priceRange?.max));
-    //     setShoes(priceData);
-    // }, [priceRange])
-
-
-    // filter by sortBy
-    // useEffect(() => {
-    //     if (sortBy && shoes?.length > 0) {
-    //         if (sortBy == "sortByPrice") {
-    //             let sortByPrice = shoes.sort((a, b) => (parseInt(a.price) > parseInt(b.price)) ? 1 : ((parseInt(b.price) > parseInt(a.price)) ? -1 : 0));
-    //             setShoes(sortByPrice);
-    //         } else {
-    //             let sortByName = shoes.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : (b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0);
-    //             setShoes(sortByName)
-    //         }
-    //         setTemp(!temp);
-    //     }
-    // }, [sortBy])
+    //Functions
 
     //onSortBy Chnage
     const onSortByChnage = (e) => {
@@ -96,7 +47,7 @@ const RightSide = () => {
     //Filter Result 
     const filterResult = ({ bySearch, byCategory, bySize, bySort }) => {
 
-        if (bySearch || byCategory?.length > 0 || bySize || bySort || priceRange) {
+        if ( bySearch || byCategory?.length > 0 || bySize || bySort || priceRange) {
 
             let filterData = shoesList;
 
@@ -112,18 +63,15 @@ const RightSide = () => {
                 filterData = filterData.filter(item => item.avalSize?.includes(parseInt(selectedSize)));
             }
 
-            console.log("shoes :- ", shoes);
-            console.log("filterData :- ", filterData);
-
-            if (sortBy && shoes?.length > 0) {
+            
+            if (sortBy) {
                 if (sortBy == "sortByPrice") {
-                    let sortByPrice = shoes.sort((a, b) => (parseInt(a.price) > parseInt(b.price)) ? 1 : ((parseInt(b.price) > parseInt(a.price)) ? -1 : 0));
-                    console.log("sortByPrice", filterData);
+                    filterData = filterData.slice().sort((a, b) => (parseInt(a.price) > parseInt(b.price)) ? 1 : ((parseInt(b.price) > parseInt(a.price)) ? -1 : 0));
                 } else {
-                    let sortByName = shoes.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : (b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0);
-                    console.log("sortByName", filterData);
+                    filterData = filterData.slice().sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : (b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0);
                 }
             }
+
             filterData = filterData.filter(item => parseInt(item.price) >= parseInt(priceRange?.min) && parseInt(item.price) <= parseInt(priceRange?.max));
 
             setShoes(filterData);

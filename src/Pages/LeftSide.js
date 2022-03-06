@@ -9,6 +9,8 @@ const LeftSide = () => {
 
     //Manage State
     const [categoryStatus, setCategoryStatus] = useState(true);
+    const [priceRangeStatus, setPriceRangeStatus] = useState(true);
+    const [sizeStatus, setSizeStatus] = useState(true);
 
     //object
     const dispatch = useDispatch();
@@ -17,8 +19,14 @@ const LeftSide = () => {
     const { category, shoesSize, selectedCategory, priceRange, selectedSize } = useSelector(state => state.home);
 
     //on Chnage Category Status
-    const categoryView = () => {
-        setCategoryStatus(!categoryStatus)
+    const openHideDrop = (type) => {
+        if (type == 'category') {
+            setCategoryStatus(!categoryStatus);
+        } else if (type == "priceRange") {
+            setPriceRangeStatus(!priceRangeStatus);
+        } else if (type == "size") {
+            setSizeStatus(!sizeStatus);
+        }
     }
 
     //On CheckBox Change Event
@@ -45,7 +53,7 @@ const LeftSide = () => {
             <div className="leftBar">
                 <div className="leftbarHeight">
                     <div>
-                        <div className="cursor-pointer justify-space-between" onClick={categoryView}>
+                        <div className="cursor-pointer justify-space-between" onClick={() => openHideDrop('category')}>
                             <div className="sizeLabel">Categories</div>
                             <div className="align-items-center">
                                 {categoryStatus ? (
@@ -72,27 +80,59 @@ const LeftSide = () => {
                     </div>
                     <div className="divedier"></div>
                     <div>
-                        <div className="sizeLabel">Price Range</div>
-                        <div className="divedier"></div>
-                        <div className='mt-30 mb-30'>
-                            <InputRange
-                                maxValue={500}
-                                minValue={0}
-                                step={2}
-                                value={priceRange}
-                                onChange={onRangeChange} />
+                        <div className="cursor-pointer justify-space-between" onClick={() => openHideDrop('priceRange')}>
+                            <div className="sizeLabel">Price Range</div>
+                            <div className="align-items-center">
+                                {priceRangeStatus ? (
+                                    <i className="fa fa-chevron-up"></i>
+                                ) : (
+                                    <i className="fa fa-chevron-down"></i>
+                                )}
+                            </div>
                         </div>
+                        {
+                            priceRangeStatus && (
+                                <>
+                                    <div className="divedier"></div>
+                                    <div className='mt-30 mb-30'>
+                                        <InputRange
+                                            maxValue={500}
+                                            minValue={0}
+                                            step={2}
+                                            value={priceRange}
+                                            onChange={onRangeChange} />
+                                    </div>
+                                </>
+                            )
+                        }
                     </div>
                     <div className="divedier"></div>
                     <div>
-                        <div className="sizeLabel">Size</div>
-                        <div className="sizeSection">
-                            {shoesSize?.length > 0 && shoesSize.map((item, index) => (
-                                <div key={index} className={`shoesSize cursor-pointer ${selectedSize == item ? 'activeSize' : ''}`} id={item} onClick={onSizeChange}>
-                                    {item}
-                                </div>
-                            ))}
+                        <div className="cursor-pointer justify-space-between" onClick={() => openHideDrop('size')}>
+                            <div className="sizeLabel">Size</div>
+                            <div className="align-items-center">
+                                {sizeStatus ? (
+                                    <i className="fa fa-chevron-up"></i>
+                                ) : (
+                                    <i className="fa fa-chevron-down"></i>
+                                )}
+                            </div>
                         </div>
+                        {
+                            sizeStatus && (
+                                <>
+                                    <div className="divedier"></div>
+                                    <div className="sizeSection">
+                                        {shoesSize?.length > 0 && shoesSize.map((item, index) => (
+                                            <div key={index} className={`shoesSize cursor-pointer ${selectedSize == item ? 'activeSize' : ''}`} id={item} onClick={onSizeChange}>
+                                                {item}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            )
+                        }
+                        <div className="divedier"></div>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import Input from '../Common/Input';
 import { debounce } from 'lodash';
-import { useSelector, useDispatch } from 'react-redux';
+import {useDispatch } from 'react-redux';
 import { onSearchChange, onClearSearch } from '../Redux/HomeSlice';
 
 const Header = () => {
