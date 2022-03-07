@@ -7,7 +7,9 @@ const Home = () => {
 
     const clickOnFilter = () => {
         var element = document.getElementById("toggleLeft");
+        var element2 = document.getElementById("overlay");
         element.classList.add("active");
+        element2.classList.add("overlay");
     }
 
     return (

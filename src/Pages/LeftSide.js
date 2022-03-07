@@ -24,11 +24,14 @@ const LeftSide = () => {
     //Close Modal in Mobile View
     const closeModal = () => {
         var element = document.getElementById("toggleLeft");
+        var element2 = document.getElementById("overlay");
         element.classList.remove("active");
+        element2.classList.remove("overlay");
     }
 
     return (
         <>
+            <div id="overlay" className=""></div>
             <div className="leftBar" id="toggleLeft">
                 <div className='modalClose'>
                     <div className='justify-content-end'>
