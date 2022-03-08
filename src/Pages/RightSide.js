@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ResultNotFound from '../Common/ResultNotFound';
-import { parseInt } from 'lodash';
 import ProductView from '../Common/ProductView';
 import SortBy from '../Common/SortBy';
 import Service from '../Common/Service';
@@ -46,7 +45,10 @@ const RightSide = () => {
                         shoes?.length > 0 ?
 
                             shoes.map((item, index) => (
-                                <ProductView item={item} index={index} />
+                                <div key={index}>
+                                    <ProductView item={item} index={index} />
+                                </div>
+
                             ))
                             :
                             <>

@@ -16,7 +16,7 @@ const ProductView = ({ index, item }) => {
 
     return (
         <>
-            <div key={index} className="productBox">
+            <div className="productBox">
                 <div className="smallLine"></div>
                 <div className="lightText">{item.title}</div>
                 <div className="darkText">{item?.name}</div>

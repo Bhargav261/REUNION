@@ -29,9 +29,20 @@ const LeftSide = () => {
         element2.classList.remove("overlay");
     }
 
+    //Click on Filter in mobile view
+    const clickOnFilter = () => {
+        var element = document.getElementById("toggleLeft");
+        var element2 = document.getElementById("overlay");
+        element.classList.add("active");
+        element2.classList.add("overlay");
+    }
+
     return (
         <>
             <div id="overlay" className=""></div>
+            <div className='filterView'>
+                <button className='filterButton' onClick={clickOnFilter}><i className='fa fa-filter filterIcon'></i></button>
+            </div>
             <div className="leftBar" id="toggleLeft">
                 <div className='modalClose'>
                     <div className='justify-content-end'>
