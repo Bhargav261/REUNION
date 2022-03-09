@@ -26,7 +26,7 @@ const LeftSide = () => {
         var element = document.getElementById("toggleLeft");
         var element2 = document.getElementById("overlay");
         element.classList.remove("active");
-        element2.classList.remove("overlay");
+        element2.classList.remove("active");
     }
 
     //Click on Filter in mobile view
@@ -34,12 +34,12 @@ const LeftSide = () => {
         var element = document.getElementById("toggleLeft");
         var element2 = document.getElementById("overlay");
         element.classList.add("active");
-        element2.classList.add("overlay");
+        element2.classList.add("active");
     }
 
     return (
         <>
-            <div id="overlay" className=""></div>
+            <div id="overlay" className="overlay" onClick={closeModal}></div>
             <div className='filterView'>
                 <button className='filterButton' onClick={clickOnFilter}><i className='fa fa-filter filterIcon'></i></button>
             </div>
